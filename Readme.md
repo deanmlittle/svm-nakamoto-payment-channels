@@ -1,18 +1,21 @@
 # Nakamoto Payment Channels
 
-The following contract presents a novel approach to off-chain scaling, repurposing existing wallet and RPC infrastructure to enable L1-validated [Nakamoto-style payment channels](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002417.html). In Nakamoto payment channels, participants:
-
-1. Timelock some funds in a channel account with pre-determined unlocking condition(s).
-2. Create multiple version of the unlocking transaction offchiin, incrementing a counter each time.
-3. Periodically commit the latest version of the transaction to the chain.
-4. Wait for the timelock to resolve the most recently comitted transaction, or unanimously sign to unlock the channel early.
+The following contract presents a novel approach to off-chain scaling, repurposing existing wallet and RPC infrastructure to enable L1-validated [Nakamoto-style payment channels](https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2013-April/002417.html). In Nakamoto payment channels, participants will:
 
 
-2. The parties create multiple versions of off-chain transactions updating 
-2. The funds can be released before the time lock expired provided participants' agreed-upon conditions are met.
-2. 
-At each state transition, a non-final 
+1. Timelock some funds behing a contract with some pre-determined unlocking conditions
+2. Create multiple version of the unlocking transaction offchain, incrementing a counter each time.
+3. When they wish to resolve the channel, either:
+    - Publish the version of the transaction with the highest counter once the timelock matures, or:
+    - Unanimously sign to finalize the channel before the timelock matures.
 
-1. Open a channel between N>1 participants
-2. Commit function
-3. Finalize
+By these simple rules, it is possible to scale onchain activity on a private server, or via direct peer-to-peer communications, without forgoing any of the protections and execution guarantees that an L1 blockchain provides.
+
+### SVM-specific implementation details
+By utilising the channel address as the blockhash of the transaction and changing to a custom RPC, we can make as many off-chain transactions as we like, using the transaction format itself as a data envelope. This is then subsequently validated by the contract using the Ed25519Signature instruction.
+
+To make this as painless as possible, we leverage several other libraries:
+
+__Solana Transaction Introspection__ - We leverage [solana-transaction-introspection](https://github.com/deanmlittle/solana-transaction-introspection) to handle verification, deserialization, and enforcement of account metas. It also enables us to define generic types that can be leveraged for both account struct and instruction deserialization.
+__Ed25519Instruction Deserialization__ - We leverage [solana-ed25519-instruction](https://github.com/deanmlittle/solana-ed25519-instruction) to deserialize the signature instruction.
+
