@@ -1,5 +1,5 @@
 [package]
-name = "payment-channel"
+name = "svm-nakamoto-payment-channels"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"

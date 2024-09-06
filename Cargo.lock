@@ -1150,15 +1150,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "57c0d7b74b563b49d38dae00a0c37d4d6de9b432382b2892f0574ddcae73fd0a"
 
 [[package]]
-name = "payment-channel"
-version = "0.1.0"
-dependencies = [
- "anchor-lang",
- "solana-program 2.0.8",
- "solana-transaction-introspection",
-]
-
-[[package]]
 name = "pbkdf2"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1722,6 +1713,15 @@ name = "subtle"
 version = "2.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13c2bddecc57b384dee18652358fb23172facb8a2c51ccc10d74c157bdea3292"
+
+[[package]]
+name = "svm-nakamoto-payment-channels"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+ "solana-program 2.0.8",
+ "solana-transaction-introspection",
+]
 
 [[package]]
 name = "syn"
