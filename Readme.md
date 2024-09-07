@@ -16,6 +16,6 @@ By utilising the channel address as the blockhash of the transaction and changin
 
 To make this as painless as possible, we leverage several other libraries:
 
-__Solana Transaction Introspection__ - We leverage [solana-transaction-introspection](https://github.com/deanmlittle/solana-transaction-introspection) to handle verification, deserialization, and enforcement of account metas. It also enables us to define generic types that can be leveraged for both account struct and instruction deserialization.
-__Ed25519Instruction Deserialization__ - We leverage [solana-ed25519-instruction](https://github.com/deanmlittle/solana-ed25519-instruction) to deserialize the signature instruction.
+__[solana-transaction-introspection](https://github.com/deanmlittle/solana-transaction-introspection)__ - Transaction verification, deserialization, and enforcement of account metas from a deserialized Ed25519 Signature instruction with support for generic types that can be leveraged for both accounts and instructions for typed deserialization.
 
+__[solana-ed25519-instruction](https://github.com/deanmlittle/solana-ed25519-instruction)__ - Signature instruction deserialization.
